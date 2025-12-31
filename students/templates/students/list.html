@@ -1,0 +1,45 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+<h1>Student List</h1>
+
+<div style="text-align:right;">
+    <a href="{% url 'add' %}" class="btn btn-add">+ Add Student</a>
+</div>
+
+<table>
+    <tr>
+        <th>Roll No</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Branch</th>
+        <th>College</th>
+        <th>Sem</th>
+        <th>Action</th>
+    </tr>
+
+    {% for s in students %}
+    <tr>
+        <td>{{ s.roll_no }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.age }}</td>
+        <td>{{ s.email }}</td>
+        <td>{{ s.phone }}</td>
+        <td>{{ s.branch }}</td>
+        <td>{{ s.college }}</td>
+        <td>{{ s.semester }}</td>
+        <td>
+            <a href="{% url 'edit' s.id %}" class="btn btn-edit">Edit</a>
+            <a href="{% url 'delete' s.id %}" class="btn btn-delete"
+               onclick="return confirm('Delete this student?')">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="9">No Students Found</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
